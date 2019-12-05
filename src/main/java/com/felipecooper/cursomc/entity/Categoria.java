@@ -1,5 +1,6 @@
 package com.felipecooper.cursomc.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Categoria  {
 	@NotNull
 	private String nome;
 	@ManyToMany(mappedBy = "categorias")
+	@JsonManagedReference
 	private List<Produto> produtos= new ArrayList<>();
 
 	public Categoria(Integer id,String nome) {

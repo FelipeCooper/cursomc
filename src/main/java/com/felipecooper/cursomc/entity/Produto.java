@@ -1,5 +1,6 @@
 package com.felipecooper.cursomc.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Produto {
     private Integer id;
     private String nome;
     private Double preco;
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),
