@@ -1,29 +1,33 @@
 package com.felipecooper.cursomc.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
-
+import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-@Entity
 public class Categoria  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@NotNull
 	private String nome;
-	
+	@ManyToMany(mappedBy = "categorias")
+	private List<Produto> produtos= new ArrayList<>();
+
+	public Categoria(Integer id,String nome) {
+		this.id=id;
+		this.nome=nome;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,7 +51,29 @@ public class Categoria  {
 			return false;
 		return true;
 	}
-	
-	
-	
+
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public List<Produto> getProdutos() {
+		return this.produtos;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 }
